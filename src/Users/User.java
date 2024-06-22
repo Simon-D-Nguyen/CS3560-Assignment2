@@ -70,22 +70,21 @@ public class User implements Observer, Subject, UserComponent{
     }
 
 
-    @Override
+
     public int getUserTotal() {
         return 1;
     }
 
-    @Override
     public int getMessagesTotal() {
         return personalTweets.size();
     }
 
-    @Override
+
     public int getGroupTotal() {
         return 0;
     }
 
-    @Override
+
     public int getPositiveWords() {
         int output = 0;
         for(String tweet: personalTweets) {
@@ -95,5 +94,16 @@ public class User implements Observer, Subject, UserComponent{
         }
 
         return output;
+    }
+
+
+    @Override
+    public boolean isGroup() {
+        return false;
+    }
+
+    @Override
+    public void accept(Visitor vis) {
+        vis.atUser(this);
     }
 }
