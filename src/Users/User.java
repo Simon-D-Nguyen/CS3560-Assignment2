@@ -24,6 +24,8 @@ public class User implements UserComponent, Observer, Subject{
     private final ArrayList<String> personalTweets;
     private final Set<Observer> observers;
     private String newTweet;
+    private final long creationTime;
+    private long lastUpdateTime;
 
 
     public User(String id) {
@@ -33,6 +35,10 @@ public class User implements UserComponent, Observer, Subject{
         this.followings = new HashSet<>();
         this.newsFeed = new ArrayList<>();
         this.observers = new HashSet<>();
+
+        //Assignment 3
+        this.creationTime = System.currentTimeMillis();
+        this.lastUpdateTime = creationTime;
     }
 
 
@@ -79,6 +85,8 @@ public class User implements UserComponent, Observer, Subject{
         newTweet = id+ ": " + tweet;
 
         notifyObservers();
+
+        resetLastUpdatedTime();
     }
 
 
@@ -119,6 +127,8 @@ public class User implements UserComponent, Observer, Subject{
     @Override
     public void update(String update) {
         newsFeed.add(update);
+
+        resetLastUpdatedTime();
     }
 
 
@@ -158,6 +168,20 @@ public class User implements UserComponent, Observer, Subject{
         return null;
     }
 
+
+    //Assignment 3  -
+    @Override
+    public long getCreationTime() {
+        return creationTime;
+    }
+
+    private void resetLastUpdatedTime() {
+        lastUpdateTime = System.currentTimeMillis();
+    }
+
+    public long getLastUpdateTime() {
+        return lastUpdateTime;
+    }
 
     @Override
     public String toString() {

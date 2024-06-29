@@ -42,4 +42,12 @@ public interface UserComponent {
      * @return a UserComponent if it exists, or null.
      */
     public UserComponent getComponent(String id);
+
+
+    /**
+     * Gets the time that the object instance was
+     * created.
+     * @return long that represents creation time.
+     */
+    public long getCreationTime();
 }

@@ -121,13 +121,14 @@ public class UserViewPanel extends JPanel implements ActionListener {
      * the GUI when called.
      */
     private void createAndShowGUI() {
-        JFrame frame = new JFrame(user.getId() + " - View");
+        //Assignment 3: Update UI
+        JFrame frame = new JFrame(user.getId() + " - Created " + user.getCreationTime());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         setPanel();
         frame.setContentPane(this);
 
-        frame.setMinimumSize(new Dimension(300, 300));
+        frame.setMinimumSize(new Dimension(350, 300));
         frame.dispose();
         frame.pack();
         frame.setVisible(true);

@@ -1,7 +1,4 @@
-import Users.NumberOfGroupsVisitor;
-import Users.NumberOfTweetsVisitor;
-import Users.NumberOfUsersVisitor;
-import Users.PositivePercentTweetVisitor;
+import Users.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +59,7 @@ public class AdminPanel extends JPanel implements ActionListener {
         //Split pane for the buttons and tree
         JSplitPane pane = new JSplitPane(SwingConstants.VERTICAL);
         pane.setMinimumSize(new Dimension(600, 200));
-        GridLayout layout = new GridLayout(5, 2);
+        GridLayout layout = new GridLayout(6, 2);
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.add(userIdTextArea);
@@ -71,7 +68,13 @@ public class AdminPanel extends JPanel implements ActionListener {
         buttonsPanel.add(addGroup);
         buttonsPanel.setLayout(layout);
         buttonsPanel.add(openUser);
-        buttonsPanel.add(new JPanel());
+
+
+        //Assignment 3- Validate Names
+        JButton validateIdsButton = new JButton("Validate IDs");
+        validateIdsButton.setActionCommand("validate");
+        validateIdsButton.addActionListener(this);
+        buttonsPanel.add(validateIdsButton);
 
         // New Buttons
         JButton totalUsersButton = new JButton("Show Total Users");
@@ -96,6 +99,12 @@ public class AdminPanel extends JPanel implements ActionListener {
         positivePercentageOfTweets.addActionListener(this);
         buttonsPanel.add(positivePercentageOfTweets);
 
+
+        //Assignment 3
+        JButton lastUpdatedButton = new JButton("Last Updated User");
+        lastUpdatedButton.setActionCommand("updated");
+        lastUpdatedButton.addActionListener(this);
+        buttonsPanel.add(lastUpdatedButton);
 
         pane.add(userTreeView);
         pane.add(buttonsPanel);
@@ -192,5 +201,23 @@ public class AdminPanel extends JPanel implements ActionListener {
 
             JOptionPane.showMessageDialog(new JFrame(), positivePercent, "Pos. Percentage", JOptionPane.INFORMATION_MESSAGE);
         }
+
+        else if("validate".equals(e.getActionCommand())) {
+            ValidIdVisitor visitor = new ValidIdVisitor();
+            server.getRoot().accept(visitor);
+            boolean isValid = visitor.isValid();
+
+            JOptionPane.showMessageDialog(new JFrame(), isValid, "Are All IDs Valid?", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        else if("updated".equals(e.getActionCommand())) {
+            LastUpdatedVisitor visitor = new LastUpdatedVisitor();
+            server.getRoot().accept(visitor);
+            String id = visitor.getLastUpdatedUserID();
+
+            System.out.println(id);
+            JOptionPane.showMessageDialog(new JFrame(), id, "Last Updated User:", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
 }

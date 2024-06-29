@@ -17,11 +17,13 @@ import java.util.Set;
 public abstract class CompositeUser implements UserComponent{
     private final Set<UserComponent> components;
     private final String id;
+    private long creationTime;
 
 
     public CompositeUser(String id) {
         this.id = id;
         this.components = new HashSet<>();
+        this.creationTime = System.currentTimeMillis();
     }
 
 
@@ -76,5 +78,11 @@ public abstract class CompositeUser implements UserComponent{
     @Override
     public String toString() {
         return id + "- Group";
+    }
+
+
+    @Override
+    public long getCreationTime() {
+        return creationTime;
     }
 }

@@ -19,4 +19,5 @@ public class UserGroup extends CompositeUser {
         vis.atUserGroup(this);
         super.accept(vis);
     }
+
 }
