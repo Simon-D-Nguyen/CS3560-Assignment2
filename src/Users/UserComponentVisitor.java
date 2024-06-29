@@ -1,50 +1,28 @@
 package Users;
 
-public class UserComponentVisitor implements Visitor{
+/**
+ * Part of Visitor design implementation, where
+ *  it makes each component/node implementation
+ *  seperate from the operations on each component.
+ *
+ *  Allows the for increased ability to add
+ *  operations on UserComponents
+ */
+public interface UserComponentVisitor {
+    /**
+     * Defines the operation to be done when
+     * at a User instance of UserComponent.
+     *
+     * @param user instance of a User.
+     */
+    public void atUser(User user);
 
-    private int numberOfUsers;
-    private int numberOfGroups;
-    private int numberOfMessages;
-    private int numberOfPositiveTweets;
 
-
-    public UserComponentVisitor() {
-        numberOfGroups = 0;
-        numberOfMessages = 0;
-        numberOfUsers = 0;
-        numberOfPositiveTweets = 0;
-    }
-
-
-    @Override
-    public void atUser(User user) {
-        numberOfUsers++;
-        numberOfMessages += user.getMessagesTotal();
-        numberOfPositiveTweets += user.getPositiveWords();
-    }
-
-    @Override
-    public void atUserGroup(UserGroup group) {
-        numberOfGroups++;
-    }
-
-    @Override
-    public int getUserTotal() {
-        return numberOfUsers;
-    }
-
-    @Override
-    public int getMessagesTotal() {
-        return numberOfMessages;
-    }
-
-    @Override
-    public int getGroupTotal() {
-        return numberOfGroups;
-    }
-
-    @Override
-    public int getPositiveWords() {
-        return numberOfPositiveTweets;
-    }
+    /**
+     * Defines the operation to be done when
+     * at a UserGroup isntance of UserComponent.
+     *
+     * @param group instance of a UserGroup.
+     */
+    public void atUserGroup(UserGroup group);
 }
