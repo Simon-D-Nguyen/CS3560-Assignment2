@@ -44,7 +44,7 @@ public abstract class CompositeUser implements UserComponent{
 
 
     @Override
-    public void accept(Visitor vis) {
+    public void accept(UserComponentVisitor vis) {
         for(UserComponent component: components) {
             component.accept(vis);
         }

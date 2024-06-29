@@ -31,7 +31,7 @@ public interface UserComponent {
      *
      * @param vis A specified visitor.
      */
-    public void accept(Visitor vis);
+    public void accept(UserComponentVisitor vis);
 
 
     /**

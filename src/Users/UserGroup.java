@@ -1,10 +1,13 @@
 package Users;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class UserGroup extends CompositeUser{
-
+/**
+ * Implementation of a user group.
+ *
+ * Uses both the Composite and Visitor design
+ * patterns in order to be searchable and contain
+ * other users.
+ */
+public class UserGroup extends CompositeUser {
 
     public UserGroup(String name) {
         super(name);
@@ -12,7 +15,7 @@ public class UserGroup extends CompositeUser{
 
 
     @Override
-    public void accept(Visitor vis) {
+    public void accept(UserComponentVisitor vis) {
         vis.atUserGroup(this);
         super.accept(vis);
     }
