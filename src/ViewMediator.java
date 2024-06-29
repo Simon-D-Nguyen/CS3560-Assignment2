@@ -16,7 +16,7 @@ import java.util.Set;
  * since they have the obesrver pattern.
  */
 public class ViewMediator  {
-    private final Set<UserViewPanel> openUserPanels;
+    private Set<UserViewPanel> openUserPanels;
     private static ViewMediator instance = null;
 
 
