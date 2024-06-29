@@ -39,9 +39,9 @@ public class PositivePercentTweetVisitor implements UserComponentVisitor{
      */
     public void defaultPositiveWords() {
         positiveWords.clear();
-        positiveWords.add("happy");
+        positiveWords.add("good");
         positiveWords.add("joy");
-        positiveWords.add("bloom");
+        positiveWords.add("great");
     }
 
 
