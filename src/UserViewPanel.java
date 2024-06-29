@@ -16,6 +16,8 @@ public class UserViewPanel extends JPanel implements ActionListener {
 
     private JList<String> newsFeed;
     private JList<String> following;
+    //Used JList instead of ListView because I could not
+    // find any good/applicable tutorials on ListView in Swing.
     private JTextArea userIdBox;
     private JTextArea tweetBox;
     private JButton followButton;
@@ -163,10 +165,13 @@ public class UserViewPanel extends JPanel implements ActionListener {
         }
         else if ("follow".equals(e.getActionCommand())) {
             if(!userIdBox.getText().isEmpty()){
-                user.followAUser((User) server.getComponent(userIdBox.getText())); //Follows User
-                mediator.updateViews(); // Updates open views
+                if(server.contains(userIdBox.getText()))
+                {
+                    user.followAUser((User) server.getComponent(userIdBox.getText())); //Follows User
+                    mediator.updateViews(); // Updates open views
 
-                userIdBox.setText("");  //Resets Text
+                    userIdBox.setText("");  //Resets Text
+                }
             }
         }
     }
